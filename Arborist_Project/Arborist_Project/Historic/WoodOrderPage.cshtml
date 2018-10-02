@@ -1,0 +1,45 @@
+﻿@{
+    Page.Title = "DEE & TEE TREE SERVICE";
+    Layout = "~/Layout/Layout.cshtml";
+
+
+    if(Request.Form["OrderSubmit"] != null)
+    {
+        //this is now onclick event
+
+    }
+
+  
+
+}
+
+
+<h3>Order Firewood</h3><br />
+
+<p><h2><strong>Place Your Firewood Order Here</strong></h2></p><br />
+<div>
+    <form name="orderform" runat="server" method="get" action="~/WoodOrderPage.cshtml">
+        <div class="container">
+          
+
+            <label>Select Amount To Be Ordered</label><br />
+            <input type="radio" name="amount" value="200" /><label for="amnt1">quarter Cord ~ $200</label><br />
+            <input type="radio" name="amount" value="260" /><label for="amnt2">half Cord ~ $260</label><br />
+            <input type="radio" name="amount" value="350" /><label for="amnt3">full Cord ~ $350</label>
+           
+
+            
+
+            <br /><br />
+
+            <input type="submit" name="OrderSubmit" value="Submit Order" class="btn btn-primary" onclick="orderValidation();" /> <br />
+            <br /><br />
+            
+
+        </div>
+
+    </form>
+</div>
+
+
+

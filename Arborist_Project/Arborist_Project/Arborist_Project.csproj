@@ -152,6 +152,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Historic\App_Code\CustomerRequests.cs" />
+    <Compile Include="Historic\App_Code\Products.cs" />
+    <Compile Include="Historic\App_Code\SignUp.cs" />
+    <Compile Include="Historic\App_Code\Transaction.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -164,11 +168,51 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Historic\HTML_Ref_Pages\AboutUs.html" />
+    <Content Include="Historic\HTML_Ref_Pages\ContactUs.html" />
+    <Content Include="Historic\HTML_Ref_Pages\GalleryPage.html" />
+    <Content Include="Historic\HTML_Ref_Pages\HomePage.html" />
+    <Content Include="Historic\HTML_Ref_Pages\ServicePage.html" />
+    <Content Include="Historic\HTML_Ref_Pages\SignUpPage.html" />
+    <Content Include="Historic\HTML_Ref_Pages\WoodOrderPage.html" />
+    <Content Include="Historic\Images\20160316_072720.jpg" />
+    <Content Include="Historic\Images\20160503_195906.jpg" />
+    <Content Include="Historic\Images\20170217_112721.jpg" />
+    <Content Include="Historic\Images\20170405_100321.jpg" />
+    <Content Include="Historic\Images\20170405_125309.jpg" />
+    <Content Include="Historic\Images\20170726_193659.jpg" />
+    <Content Include="Historic\Images\saw_work.jpg" />
+    <Content Include="Historic\JavaScriptContact.js" />
+    <Content Include="Historic\JavaScriptSignup.js" />
+    <Content Include="Historic\JavaScript_Login.js" />
+    <Content Include="Historic\JavaScript_OrderForm.js" />
+    <Content Include="Historic\StyleSheet.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Historic\AboutUs.cshtml" />
+    <Content Include="Historic\AddProduct.cshtml" />
+    <Content Include="Historic\ContactUs.cshtml" />
+    <Content Include="Historic\DeleteProduct.cshtml" />
+    <Content Include="Historic\GalleryPage.cshtml" />
+    <Content Include="Historic\HomePage.cshtml" />
+    <Content Include="Historic\ListProducts.cshtml" />
+    <Content Include="Historic\Layout\Layout.cshtml" />
+    <None Include="Historic\packages.config" />
+    <Content Include="Historic\ServicePage.cshtml" />
+    <Content Include="Historic\SignUpPage.cshtml" />
+    <Content Include="Historic\UpdateProduct.cshtml" />
+    <Content Include="Historic\Web.config" />
+    <Content Include="Historic\Shared\default.cshtml" />
+    <Content Include="Historic\Shared\footer.cshtml" />
+    <Content Include="Historic\Shared\header.cshtml" />
+    <Content Include="Historic\Shared\login.cshtml" />
+    <None Include="Historic\Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <Content Include="Historic\WoodOrderPage.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />

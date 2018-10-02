@@ -1,0 +1,79 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <title>Sign Up</title>
+    <link rel="stylesheet" type="text/css" href="StyleSheet.css" />
+    <script src="JavaScriptSignup.js" type="text/javascript"></script>
+</head>
+<body>
+    <header>DEE & TEE TREE SERVICE</header>
+    <div class="container-fluid">
+        <img class="img1" src="images/saw_work.jpg" />
+    </div>
+
+    <div class="container-fluid">
+        <nav class="navbar ">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="navbar-header">
+                        <ul class="nav navbar-nav">
+                            <li><a href="HomePage.html" target="_blank">Home</a></li>
+                            <li><a href="ServicePage.html" target="_blank">Services</a></li>
+                            <li><a href="WoodOrderPage.html" target="_blank">Order Firewood</a></li>
+                            <li><a href="AboutUs.html" target="_blank">About Us</a></li>
+                            <li><a href="GalleryPage.html" target="_blank">Gallery</a></li>
+                            <li><a href="ContactUs.html" target="_blank">Contact Us</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+
+    <div>
+        <form action="SignUpPage.html">
+            <div class="container">
+                <h2>Create User Account</h2>
+                <p>Please fill in this form to create an account.</p>
+                <hr>
+                <label for="email"><b>Email</b></label><br />
+                <input type="text" placeholder="Enter Email" name="email"id="mail" /><br />
+
+                <label for="username"><b>User Name</b></label><br />
+                <input type="text" placeholder="Enter User Name" name="user" id="user" /><br />
+
+                <label for="psw"><b>Password</b></label><br />
+                <input type="password" placeholder="Enter Password" name="pswd"id="psw" /><br />
+
+                <label for="psw-repeat"><b>Repeat Password</b></label><br />
+                <input type="password" placeholder="Repeat Password" name="psw-repeat" id="repeat"/> <br /><br />
+
+                <input type="submit" class="Create" name="create" value="Submit" onclick="signupValidation();" />
+
+
+
+            </div>
+        </form>
+    </div>
+    <div class="content">
+
+
+    </div>
+    <br /><br />
+
+
+    <div class="footer">
+        <p>
+            Dee&Tee Tree Services<br />
+            Located on a Street<br />
+            In a City<br />
+            Washington<br />
+            Contact Number: 1-800-xxx-xxx
+
+        </p>
+    </div>
+</body>
+</html>

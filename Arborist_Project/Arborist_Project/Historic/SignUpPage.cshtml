@@ -1,0 +1,111 @@
+﻿@using System.Data.SqlClient;
+@using System.Configuration;
+
+
+@{
+    Page.Title = "Sign Up";
+    Layout = "~/Layout/Layout.cshtml";
+
+    Validation.RequireField("email", "You must enter a email");
+    Validation.RequireField("username", "username is required");
+    Validation.RequireField("password", "You haven't entered a password");
+    Validation.RequireField("pswrepeat", "You must reenter your password");
+    //Validation.RequireField("fname", "fname is required");
+    //Validation.RequireField("lname", "lname is required");
+    //Validation.RequireField("phone", "You must enter a phone number");
+    //Validation.RequireField("street", "street is required");
+    //Validation.RequireField("city", "You must enter a city");
+    //Validation.RequireField("state", "You must enter a state");
+    //Validation.RequireField("zip", "zip code is required");
+
+
+
+    var email = "";
+    var username = "";
+    var password = "";
+    var pswrepeat = "";
+    var fname = "";
+    var lname = "";
+    var phone = "";
+    var street = "";
+    var city = "";
+    var state = "";
+    var zip = "";
+
+
+    if (IsPost /*&& Validation.IsValid()*/)
+    {
+        email = Request.Form["email"];
+        username = Request.Form["user"];
+        password = Request.Form["pswd"];
+        pswrepeat = Request.Form["psw-repeat"];
+        fname = Request.Form["txtFirstname"];
+        lname = Request.Form["txtLastname"];
+        phone = Request.Form["txtphone"];
+        street = Request.Form["txtLine"];
+        city = Request.Form["txtcity"];
+        state = Request.Form["txtstate"];
+        zip = Request.Form["txtzip"];
+
+        string conStr = ConfigurationManager.ConnectionStrings["ConStr"].ConnectionString;
+        using (SqlConnection con = new SqlConnection(conStr))
+        {
+            con.Open();
+            string query = string.Format("INSERT INTO SignUp (Email, Username, Password, PSWRepeat,Fname,Lname,Phone,Street,City,State,Zip ) Values('{0}', '{1}', '{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','{10}')", email, username, password,pswrepeat,fname,lname,phone,street,city,state,zip);
+            //string query = string.Format("INSERT INTO SignUp (Email, Username, Password, PSWRepeat ) Values('{0}', '{1}', '{2}','{3}')", email, username, password,pswrepeat);
+
+
+            using (SqlCommand cmd = new SqlCommand(query, con))
+            {
+                var result = cmd.ExecuteScalar();
+            }
+        }
+
+        Response.Redirect("~/HomePage.cshtml");
+    }
+}
+
+
+
+<div>
+    <form method="post" @*action="~/SignUpPage.cshtml"*@>
+        <div class="container">
+            <h2>Create User Account</h2>
+            <p>Please fill in this form to create an account.</p>
+            <hr>
+            <label for="fn">First name:</label><br /> <input type="text" name="txtFirstname"value="@Request.Form["txtFirstname"]" placeholder="First Name" id="fn" size="40" /><br />
+
+            <label for="ln">Last name:</label><br />  <input type="text" name="txtLastname" value="@Request.Form["txtLastname"]" placeholder="Last Name" id="ln" size="40" /><br />
+
+            <label for="pn">Phone Number:</label><br />  <input type="tel" name="txtphone" value="@Request.Form["txtphone"]" placeholder="Phone" id="pn" size="40" /><br />
+
+            <label for="email"><b>Email</b></label><br />
+            <input type="text" placeholder="Enter Email" name="email" value="@Request.Form["email"]" id="mail" /><br />
+
+            <label for="address">Address</label><br />
+
+            <label for="line">Street Address:</label><br /> <input type="text" name="txtLine" value="@Request.Form["txtLine"]" id="line" size="60" /><br />
+
+            <label for="city">City:</label><br /> <input type="text" name="txtcity" value="@Request.Form["txtcity"]" id="city" size="40" /><br />
+
+            <label for="state">State:</label><br /> <input type="text" name="txtstate" value="@Request.Form["txtstate"]" id="state" size="40" /><br />
+
+            <label for="zip">Zip Code:</label><br /> <input type="text" name="txtzip" value="@Request.Form["txtzip"]" id="zip" size="20" /><br />
+
+            <label for="username"><b>User Name</b></label><br />
+            <input type="text" placeholder="Enter User Name" name="user"  value="@Request.Form["user"]"id="user" /><br />
+
+            <label for="psw"><b>Password</b></label><br />
+            <input type="password" placeholder="Enter Password" name="pswd" value="@Request.Form["pswd"]" id="psw" /><br />
+
+            <label for="psw-repeat"><b>Repeat Password</b></label><br />
+            <input type="password" placeholder="Repeat Password" name="psw-repeat" value="@Request.Form["psw-repeat"]" id="repeat" /> <br /><br />
+
+            <input type="submit" class="Create" name="create" value="Submit" onclick="return signupValidation();" />
+
+
+
+        </div>
+    </form>
+    <script src="~/JavaScriptSignup.js"></script>
+</div>

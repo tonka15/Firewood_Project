@@ -1,0 +1,107 @@
+﻿@using System.Data.SqlClient;
+@using System.Configuration;
+
+@{
+    Page.Title = "Update Product";
+    Layout = "~/Layout/Layout.cshtml";
+
+
+    var name = "";
+    var description = "";
+    var price = "";
+    var productId = "";
+
+
+    if (!IsPost)
+    {
+        if (!Request.QueryString["Id"].IsEmpty() && Request.QueryString["Id"].IsInt())
+        {
+            productId = Request.QueryString["Id"];
+            string conStr = ConfigurationManager.ConnectionStrings["ConStr"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(conStr))
+            {
+                con.Open();
+                string query = string.Format("SELECT * FROM Products WHERE ProductID = '{0}'", productId);
+                using (SqlCommand cmd = new SqlCommand(query, con))
+                {
+                    SqlDataReader result = cmd.ExecuteReader();
+
+
+                    if (result.HasRows)
+                    {
+                        result.Read();
+                        name = result["Name"].ToString();
+                        description = result["Description"].ToString();
+                        price = result["Price"].ToString();
+                    }
+                    else
+                    {
+                        Validation.AddFormError("No product was selected.");
+                    }
+                }
+            }
+        }
+        else
+        {
+            Validation.AddFormError("No product was selected.");
+        }
+    }
+
+    if (IsPost)
+    {
+        Validation.RequireField("name", "You must enter a name");
+        Validation.RequireField("description", "description is required");
+        Validation.RequireField("price", "You haven't entered a price");
+        Validation.RequireField("productid", "No product ID was submitted!");
+
+        name = Request.Form["name"];
+        description = Request.Form["description"];
+        price = Request.Form["price"];
+        productId = Request.Form["productId"];
+
+        if (Validation.IsValid())
+        {
+            string conStr = ConfigurationManager.ConnectionStrings["ConStr"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(conStr))
+            {
+                con.Open();
+                string query = string.Format("UPDATE Products SET Name='{0}', Description='{1}', Price='{2}' WHERE ProductID='{3}'", name, description, price, productId);
+                using (SqlCommand cmd = new SqlCommand(query, con))
+                {
+                    var result = cmd.ExecuteScalar();
+                }
+            }
+
+            Response.Redirect("~/ListProducts.cshtml");
+        }
+    }
+}
+
+
+<h2>Update Products</h2>
+@Html.ValidationSummary()
+<form method="post">
+    <fieldset>
+        <legend>Product Information</legend>
+
+        <p>
+            <label for="name">Name:</label>
+            <input type="text" name="name" value="@name" />
+        </p>
+
+        <p>
+            <label for="description">Description:</label>
+            <input type="text" name="description" value="@description" />
+        </p>
+
+        <p>
+            <label for="price">Price:</label>
+            <input type="text" name="price" value="@price" />
+        </p>
+
+        <input type="hidden" name="productid" value="@productId" />
+
+        <p><input type="submit" name="buttonSubmit" value="Submit Changes" /></p>
+    </fieldset>
+</form>
+<p><a href="~/ListProducts.cshtml">Return to movie listing</a></p>

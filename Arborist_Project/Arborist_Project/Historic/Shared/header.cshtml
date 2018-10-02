@@ -1,0 +1,100 @@
+﻿@using System.Data.SqlClient;
+@using System.Configuration;
+@{
+
+    string conStr = ConfigurationManager.ConnectionStrings["ConStr"].ConnectionString;
+
+    string userId = "";
+
+    if (Response.Cookies["userCookie"] != null)//checks to c  if cookies exists
+    {
+        userId = Response.Cookies["userCookie"].Value;//if it exists it assigns the value of the cookie to userID
+    }
+
+    if (Session["login"] != null)
+    {//checks to c if a seesion named login exists
+
+
+        userId = Session["login"].ToString();//attaches value of session to userId
+        Response.Cookies["userCookie"].Value = Request.Form["user"];//only runs if something is there to request
+        Response.Cookies["userCookie"].Expires = DateTime.Now.AddMinutes(10);
+
+    }
+
+    if (Request.Form["submit"] != null)
+    {
+        string user = Request["user"];
+        string password = Request["password"];
+
+        if(RegisteredUser(user, password))
+        {
+            Response.Redirect("HomePage.cshtml");
+        }
+
+        Session["login"] = Request.Form["user"];//storing user name in session
+        Response.Redirect(HttpContext.Current.Request.Url.AbsoluteUri);//redirecting back to current page
+
+    }
+
+    bool RegisteredUser(string userName, string password)
+    {
+
+
+        // string stmt = string.Format("SELECT COUNT(*) FROM SignUp WHERE Username = '{0}' AND Password = '{1}'", Request.Form["user"], Request.Form["password"]);
+        string stmt = string.Format("SELECT COUNT(*) FROM SignUp WHERE Username = '" + userName + "' AND Password = '" + password + "'");
+
+        int count = 0;
+
+
+        using (SqlConnection thisConnection = new SqlConnection(conStr))
+        {
+            using (SqlCommand cmdCount = new SqlCommand(stmt, thisConnection))
+            {
+                thisConnection.Open();
+                count = (int)cmdCount.ExecuteScalar();
+            }
+        }
+        return (count != 0) ? true : false;
+    }
+
+}
+
+
+
+
+
+
+
+<header>DEE & TEE TREE SERVICE</header>
+
+<form method="post">
+    <div>
+        Username: <input type="text" id="user" name="user" value="@userId" placeholder="Username" />
+        Password: <input type="text" id="psw" name="password" placeholder="Password" />
+        <input type="submit" name="submit" value="Login" @*onclick="return loginValidation();"*@ />
+        Not a member? <input type="button" name="" value="Create Account" @*onclick="window.location.href='SignUpPage.cshtml'"*@ />
+    </div>
+
+</form>
+<div class="container-fluid">
+    <img class="img1" src="~/images/saw_work.jpg" />
+</div>
+<div class="container-fluid">
+    <nav class="navbar ">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="navbar-header">
+                    <ul class="nav navbar-nav">
+                        <li><a href="~/HomePage.cshtml">Home</a></li>
+                        <li><a href="~/ServicePage.cshtml">Services</a></li>
+                        <li><a href="~/WoodOrderPage.cshtml">Order Firewood</a></li>
+                        <li><a href="~/AboutUs.cshtml">About Us</a></li>
+                        <li><a href="~/GalleryPage.cshtml">Gallery</a></li>
+                        <li><a href="~/ContactUs.cshtml">Contact Us</a></li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+</div>
