@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 
-namespace Arborist_Project
+namespace Firewood_Project
 {
     public class RouteConfig
     {

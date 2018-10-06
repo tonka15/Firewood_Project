@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Arborist_Project.Controllers
+namespace Firewood_Project.Controllers
 {
     public class HomeController : Controller
     {

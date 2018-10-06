@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Optimization;
 
-namespace Arborist_Project
+namespace Firewood_Project
 {
     public class BundleConfig
     {

@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Mvc;
 
-namespace Arborist_Project
+namespace Firewood_Project
 {
     public class FilterConfig
     {
