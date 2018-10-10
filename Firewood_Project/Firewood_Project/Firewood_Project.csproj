@@ -159,9 +159,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\FirewoodDatabase.mdf" />
-    <Content Include="App_Data\FirewoodDatabase_log.ldf">
-      <DependentUpon>FirewoodDatabase.mdf</DependentUpon>
+    <Content Include="App_Data\Firewood.mdf" />
+    <Content Include="App_Data\Firewood_log.ldf">
+      <DependentUpon>Firewood.mdf</DependentUpon>
     </Content>
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
