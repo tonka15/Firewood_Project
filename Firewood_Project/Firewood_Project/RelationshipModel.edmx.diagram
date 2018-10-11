@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="089d598b0e90438ea74d9f5f07cb7a37" Name="Diagram1">
+        <EntityTypeShape EntityType="FirewoodModel.Account_Information" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="FirewoodModel.Order" Width="1.5" PointX="6.25" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="FirewoodModel.FK_Orders_To_Account_Information" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="FirewoodModel.Customer" Width="1.5" PointX="3.375" PointY="2.875" />
+        <AssociationConnector Association="FirewoodModel.FK_Customer_To_Account_Information" />
+        <AssociationConnector Association="FirewoodModel.FK_Orders_To_Customer" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

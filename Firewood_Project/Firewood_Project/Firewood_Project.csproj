@@ -157,6 +157,16 @@
     <Compile Include="Historic\App_Code\SignUp.cs" />
     <Compile Include="Historic\App_Code\Transaction.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RelationshipModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RelationshipModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RelationshipModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RelationshipModel.edmx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\Firewood.mdf" />
@@ -191,6 +201,10 @@
     <Content Include="Historic\JavaScript_Login.js" />
     <Content Include="Historic\JavaScript_OrderForm.js" />
     <Content Include="Historic\StyleSheet.css" />
+    <Content Include="RelationshipModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>RelationshipModel.Context.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
@@ -217,6 +231,13 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
     <Content Include="Historic\WoodOrderPage.cshtml" />
+    <EntityDeploy Include="RelationshipModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>RelationshipModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="RelationshipModel.edmx.diagram">
+      <DependentUpon>RelationshipModel.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -228,6 +249,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="SQL_Scripts\SQL_1.txt" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -258,6 +280,9 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

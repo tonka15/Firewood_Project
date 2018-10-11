@@ -1,0 +1,248 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="FirewoodModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Account_Information">
+          <Key>
+            <PropertyRef Name="Account_Number" />
+          </Key>
+          <Property Name="Account_Number" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="User_Name" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Password" Type="nchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="Customer_Id" />
+          </Key>
+          <Property Name="Customer_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Account_Number" Type="int" Nullable="false" />
+          <Property Name="First_Name" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Last_Name" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Zip_Code" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Phone_Number" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Email_Address" Type="nchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="Order_Id" />
+          </Key>
+          <Property Name="Order_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Customer_Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Employee_Id" Type="int" Nullable="false" />
+          <Property Name="Order_Date" Type="date" Nullable="false" />
+          <Property Name="Shipped_Date" Type="date" Nullable="false" />
+          <Property Name="Shipping_Address" Type="nchar" MaxLength="50" />
+          <Property Name="City" Type="nchar" MaxLength="25" />
+          <Property Name="State" Type="nchar" MaxLength="25" />
+          <Property Name="Zip_Code" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <Association Name="FK_Customer_To_Account_Information">
+          <End Role="Account_Information" Type="Self.Account_Information" Multiplicity="1" />
+          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account_Information">
+              <PropertyRef Name="Account_Number" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="Account_Number" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_To_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Customer_Id" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="Customer_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FirewoodModelStoreContainer">
+          <EntitySet Name="Account_Information" EntityType="Self.Account_Information" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Customer_To_Account_Information" Association="Self.FK_Customer_To_Account_Information">
+            <End Role="Account_Information" EntitySet="Account_Information" />
+            <End Role="Customer" EntitySet="Customer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_To_Customer" Association="Self.FK_Orders_To_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="FirewoodModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Account_Information">
+          <Key>
+            <PropertyRef Name="Account_Number" />
+          </Key>
+          <Property Name="Account_Number" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="User_Name" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK_Orders_To_Account_Information" FromRole="Account_Information" ToRole="Orders" />
+          <NavigationProperty Name="Customers" Relationship="FirewoodModel.FK_Customer_To_Account_Information" FromRole="Account_Information" ToRole="Customer" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="Customer_Id" />
+            <PropertyRef Name="Order_Id" />
+          </Key>
+          <Property Name="Customer_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Account_Number" Type="Int32" Nullable="false" />
+          <Property Name="First_Name" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Last_Name" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Zip_Code" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Phone_Number" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Email_Address" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Account_Information" Relationship="Self.FK_Orders_To_Account_Information" FromRole="Orders" ToRole="Account_Information" />
+          <Property Name="Order_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Employee_Id" Type="Int32" Nullable="false" />
+          <Property Name="Order_Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Shipped_Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Shipping_Address" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="25" FixedLength="true" Unicode="true" />
+          <Property Name="State" Type="String" MaxLength="25" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Customer" Relationship="FirewoodModel.FK_Orders_To_Customer" FromRole="Order" ToRole="Customer" />
+        </EntityType>
+        <Association Name="FK_Orders_To_Account_Information">
+          <End Role="Account_Information" Type="Self.Account_Information" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account_Information">
+              <PropertyRef Name="Account_Number" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="Account_Number" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FirewoodEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Account_Information" EntityType="Self.Account_Information" />
+          <EntitySet Name="Orders" EntityType="Self.Order" />
+          <AssociationSet Name="FK_Orders_To_Account_Information" Association="Self.FK_Orders_To_Account_Information">
+            <End Role="Account_Information" EntitySet="Account_Information" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <EntitySet Name="Customers" EntityType="FirewoodModel.Customer" />
+          <AssociationSet Name="FK_Customer_To_Account_Information" Association="FirewoodModel.FK_Customer_To_Account_Information">
+            <End Role="Account_Information" EntitySet="Account_Information" />
+            <End Role="Customer" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_To_Customer" Association="FirewoodModel.FK_Orders_To_Customer">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="Customer_Id" />
+          </Key>
+          <Property Name="Customer_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Account_Number" Type="Int32" Nullable="false" />
+          <Property Name="First_Name" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Last_Name" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Zip_Code" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Phone_Number" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Email_Address" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Account_Information" Relationship="FirewoodModel.FK_Customer_To_Account_Information" FromRole="Customer" ToRole="Account_Information" />
+          <NavigationProperty Name="Orders" Relationship="FirewoodModel.FK_Orders_To_Customer" FromRole="Customer" ToRole="Order" />
+        </EntityType>
+        <Association Name="FK_Customer_To_Account_Information">
+          <End Type="FirewoodModel.Account_Information" Role="Account_Information" Multiplicity="1" />
+          <End Type="FirewoodModel.Customer" Role="Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account_Information">
+              <PropertyRef Name="Account_Number" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="Account_Number" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_To_Customer">
+          <End Type="FirewoodModel.Customer" Role="Customer" Multiplicity="1" />
+          <End Type="FirewoodModel.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Customer_Id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="Customer_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="FirewoodModelStoreContainer" CdmEntityContainer="FirewoodEntities">
+          <EntitySetMapping Name="Account_Information">
+            <EntityTypeMapping TypeName="FirewoodModel.Account_Information">
+              <MappingFragment StoreEntitySet="Account_Information">
+                <ScalarProperty Name="Account_Number" ColumnName="Account_Number" />
+                <ScalarProperty Name="User_Name" ColumnName="User_Name" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="FirewoodModel.Order">
+              <MappingFragment StoreEntitySet="Orders">
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Shipping_Address" ColumnName="Shipping_Address" />
+                <ScalarProperty Name="Shipped_Date" ColumnName="Shipped_Date" />
+                <ScalarProperty Name="Order_Date" ColumnName="Order_Date" />
+                <ScalarProperty Name="Employee_Id" ColumnName="Employee_Id" />
+                <ScalarProperty Name="Order_Id" ColumnName="Order_Id" />
+                <ScalarProperty Name="Customer_Id" ColumnName="Customer_Id" />
+                <ScalarProperty Name="Zip_Code" ColumnName="Zip_Code" />
+                </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="FirewoodModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="Email_Address" ColumnName="Email_Address" />
+                <ScalarProperty Name="Phone_Number" ColumnName="Phone_Number" />
+                <ScalarProperty Name="Zip_Code" ColumnName="Zip_Code" />
+                <ScalarProperty Name="Last_Name" ColumnName="Last_Name" />
+                <ScalarProperty Name="First_Name" ColumnName="First_Name" />
+                <ScalarProperty Name="Account_Number" ColumnName="Account_Number" />
+                <ScalarProperty Name="Customer_Id" ColumnName="Customer_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
